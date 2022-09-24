@@ -19,7 +19,7 @@ namespace Keepers.Services
     {
       VaultKeep vaultKeep = _vkRepo.Create(newVaultKeep);
       Vault vault = _vaultsService.GetOne(newVaultKeep.VaultId, user.Id);
-      if (vaultKeep.CreatorId != user.Id)
+      if (vault.CreatorId != user.Id)
       {
         throw new Exception("You cannot add this keep to another user's vault");
       }
@@ -28,8 +28,12 @@ namespace Keepers.Services
 
     internal string Delete(int id, string userId)
     {
-      Vault vault = _vaultsService.GetOne(id, userId);
-      if (vault.CreatorId != userId)
+      VaultKeep vaultKeep = _vkRepo.GetOne(id);
+      if (vaultKeep == null)
+      {
+        throw new Exception("There is no keep in this vault by that Id");
+      }
+      if (vaultKeep.CreatorId != userId)
       {
         throw new Exception("You cannot delete a keep that belongs to another user's vault");
       }

@@ -1,4 +1,5 @@
 using System.Data;
+using System.Linq;
 using Dapper;
 using Keepers.Models;
 
@@ -36,5 +37,14 @@ namespace Keepers.Repositories
       _db.Execute(sql, new { id });
     }
 
+    internal VaultKeep GetOne(int id)
+    {
+      string sql = @"
+      SELECT *
+      FROM vaultkeeps
+      WHERE id = @id;
+      ";
+      return _db.Query<VaultKeep>(sql, new { id }).FirstOrDefault();
+    }
   }
 }

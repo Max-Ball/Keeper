@@ -38,7 +38,7 @@ namespace Keepers.Controllers
 
     [HttpDelete("{id}")]
     [Authorize]
-    public async Task<ActionResult<VaultKeepVM>> Delete(int id)
+    public async Task<ActionResult<string>> Delete(int id)
     {
       try
       {

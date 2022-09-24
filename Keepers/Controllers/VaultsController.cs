@@ -46,7 +46,7 @@ namespace Keepers.Controllers
       try
       {
         Account user = await HttpContext.GetUserInfoAsync<Account>();
-        Vault vault = _vaultsService.GetOne(id, user.Id);
+        Vault vault = _vaultsService.GetOne(id, user?.Id);
         return Ok(vault);
       }
       catch (Exception e)
@@ -61,7 +61,7 @@ namespace Keepers.Controllers
       try
       {
         Account user = await HttpContext.GetUserInfoAsync<Account>();
-        List<VaultKeepVM> keeps = _keepsService.GetKeepsByVaultId(vaultId, user.Id);
+        List<VaultKeepVM> keeps = _keepsService.GetKeepsByVaultId(vaultId, user?.Id);
         return Ok(keeps);
       }
       catch (Exception e)

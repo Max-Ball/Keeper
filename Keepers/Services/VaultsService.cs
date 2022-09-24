@@ -69,6 +69,7 @@ namespace Keepers.Services
     internal List<Vault> GetVaultsByProfileId(string profileId)
     {
       List<Vault> vaults = _vaultsRepo.GetVaultsByProfileId(profileId);
+      vaults = vaults.FindAll(v => v.IsPrivate == false);
       return vaults;
     }
   }
