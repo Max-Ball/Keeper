@@ -28,6 +28,8 @@ namespace Keepers.Services
       {
         throw new Exception("No keep at that id");
       }
+      keep.Views++;
+      _KeepsRepo.Update(keep);
       return keep;
     }
 

@@ -8,11 +8,15 @@ namespace Keepers.Services
   {
     private readonly VaultKeepsRepository _vkRepo;
     private readonly VaultsService _vaultsService;
+    private readonly KeepsService _keepsService;
+    private readonly KeepsRepository _keepsRepo;
 
-    public VaultKeepsService(VaultKeepsRepository vkRepo, VaultsService vaultsService)
+    public VaultKeepsService(VaultKeepsRepository vkRepo, VaultsService vaultsService, KeepsService keepsService, KeepsRepository keepsRepo)
     {
       _vkRepo = vkRepo;
       _vaultsService = vaultsService;
+      _keepsService = keepsService;
+      _keepsRepo = keepsRepo;
     }
 
     internal VaultKeep Create(VaultKeep newVaultKeep, Account user)
@@ -23,6 +27,9 @@ namespace Keepers.Services
       {
         throw new Exception("You cannot add this keep to another user's vault");
       }
+      Keep keep = _keepsService.GetOne(newVaultKeep.KeepId);
+      keep.Kept++;
+      _keepsRepo.Update(keep);
       return vaultKeep;
     }
 
@@ -37,6 +44,9 @@ namespace Keepers.Services
       {
         throw new Exception("You cannot delete a keep that belongs to another user's vault");
       }
+      Keep keep = _keepsService.GetOne(vaultKeep.KeepId);
+      keep.Kept--;
+      _keepsRepo.Update(keep);
       _vkRepo.Delete(id);
       return $"This vaultkeep has been deleted";
     }

@@ -102,6 +102,8 @@ namespace Keepers.Repositories
       UPDATE keeps SET
       name = @name,
       img = @img,
+      views = @views,
+      kept = @kept,
       description = @description
       WHERE id = @id;
       ";
