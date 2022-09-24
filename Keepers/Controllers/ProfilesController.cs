@@ -1,10 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using CodeWorks.Auth0Provider;
 using Keepers.Models;
 using Keepers.Services;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Keepers.Controllers
@@ -25,12 +22,10 @@ namespace Keepers.Controllers
     }
 
     [HttpGet("{profileId}")]
-    [Authorize]
-    public async Task<ActionResult<Profile>> GetProfile(string profileId)
+    public ActionResult<Profile> GetProfile(string profileId)
     {
       try
       {
-        Account user = await HttpContext.GetUserInfoAsync<Account>();
         Profile profile = _profilesService.GetProfile(profileId);
         return Ok(profile);
       }
@@ -41,13 +36,11 @@ namespace Keepers.Controllers
     }
 
     [HttpGet("{profileId}/keeps")]
-    [Authorize]
-    public async Task<ActionResult<List<Keep>>> GetKeepsByProfileId(string profileId)
+    public ActionResult<List<Keep>> GetKeepsByProfileId(string profileId)
     {
       try
       {
-        Account user = await HttpContext.GetUserInfoAsync<Account>();
-        List<Keep> keeps = _keepsService.GetKeepsByProfileId(profileId, user);
+        List<Keep> keeps = _keepsService.GetKeepsByProfileId(profileId);
         return Ok(keeps);
       }
       catch (Exception e)
@@ -57,13 +50,11 @@ namespace Keepers.Controllers
     }
 
     [HttpGet("{profileId}/vaults")]
-    [Authorize]
-    public async Task<ActionResult<List<Vault>>> GetVaultsByProfileId(string profileId)
+    public ActionResult<List<Vault>> GetVaultsByProfileId(string profileId)
     {
       try
       {
-        Account user = await HttpContext.GetUserInfoAsync<Account>();
-        List<Vault> vaults = _vaultsService.GetVaultsByProfileId(profileId, user);
+        List<Vault> vaults = _vaultsService.GetVaultsByProfileId(profileId);
         return Ok(vaults);
       }
       catch (Exception e)

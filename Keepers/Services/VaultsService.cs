@@ -29,7 +29,7 @@ namespace Keepers.Services
 
       if (vault.IsPrivate == true && vault.CreatorId != userId)
       {
-
+        throw new Exception("This vault is either private or it is not yours");
       }
       return vault;
     }
@@ -37,15 +37,16 @@ namespace Keepers.Services
     internal object Update(Account user, Vault update)
     {
       Vault original = GetOne(update.Id, user.Id);
+      if (user.Id != original.CreatorId)
+      {
+        throw new Exception("This is not your vault to edit");
+      }
+
       original.Name = update.Name ?? original.Name;
       original.Description = update.Description ?? original.Description;
       original.IsPrivate = update.IsPrivate ?? original.IsPrivate;
       original.Img = update.Img ?? original.Img;
 
-      if (user.Id != update.CreatorId)
-      {
-        throw new Exception("This is not your vault to edit");
-      }
       return _vaultsRepo.Update(original);
     }
 
@@ -65,7 +66,7 @@ namespace Keepers.Services
       return _vaultsRepo.GetVaultsByAccount(creatorId);
     }
 
-    internal List<Vault> GetVaultsByProfileId(string profileId, Account user)
+    internal List<Vault> GetVaultsByProfileId(string profileId)
     {
       List<Vault> vaults = _vaultsRepo.GetVaultsByProfileId(profileId);
       return vaults;

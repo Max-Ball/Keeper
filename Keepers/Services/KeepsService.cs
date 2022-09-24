@@ -8,10 +8,12 @@ namespace Keepers.Services
   public class KeepsService
   {
     private readonly KeepsRepository _KeepsRepo;
+    private readonly VaultsService _vaultsService;
 
-    public KeepsService(KeepsRepository keepsRepo)
+    public KeepsService(KeepsRepository keepsRepo, VaultsService vaultsService)
     {
       _KeepsRepo = keepsRepo;
+      _vaultsService = vaultsService;
     }
 
     internal List<Keep> GetAll()
@@ -36,15 +38,17 @@ namespace Keepers.Services
 
     internal object Update(Account user, Keep update)
     {
+
       Keep original = GetOne(update.Id);
+      if (user.Id != original.CreatorId)
+      {
+        throw new Exception("This is not your keep to edit");
+      }
+
       original.Name = update.Name ?? original.Name;
       original.Description = update.Description ?? original.Description;
       original.Img = update.Img ?? original.Img;
 
-      if (user.Id != update.CreatorId)
-      {
-        throw new Exception("This is not your keep to edit");
-      }
       return _KeepsRepo.Update(original);
     }
 
@@ -62,6 +66,7 @@ namespace Keepers.Services
 
     internal List<VaultKeepVM> GetKeepsByVaultId(int vaultId, string userId)
     {
+      Vault vault = _vaultsService.GetOne(vaultId, userId);
       List<VaultKeepVM> keeps = _KeepsRepo.GetKeepsByVaultId(vaultId);
       if (keeps == null)
       {
@@ -69,7 +74,8 @@ namespace Keepers.Services
       }
       return keeps;
     }
-    internal List<Keep> GetKeepsByProfileId(string profileId, Account user)
+
+    internal List<Keep> GetKeepsByProfileId(string profileId)
     {
       List<Keep> keeps = _KeepsRepo.GetKeepsByProfileId(profileId);
       return keeps;
