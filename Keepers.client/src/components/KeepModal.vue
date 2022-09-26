@@ -21,9 +21,7 @@
                     <i class="mdi mdi-share-variant"></i>{{keep.share}}
                   </span>
                 </div>
-              </div>
-              <div>
-                <div class="text-center fs-1">
+                <div class="text-center fs-1 mt-3">
                   {{keep.name}}
                 </div>
                 <span class="my-3">
@@ -42,11 +40,19 @@
                       </span>
                     </div>
                   </router-link>
-
-
                 </div>
                 <div class="col-md-6">
-                  <button class="btn btn-outline">Add To Vault</button>
+                  <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                      aria-expanded="false">
+                      Add To Vault
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li v-for="v in vaults" :key="v.id">
+                        <VaultList :vault="v" />
+                      </li>
+                    </ul>
+                  </div>
                 </div>
                 <div class="col-md-1">
                   <i v-if="keep.creatorId == account.id" class="mdi mdi-delete fs-3 selectable" @click="deleteKeep()"
@@ -75,9 +81,11 @@ export default {
 
   setup() {
 
+
     return {
       keep: computed(() => AppState.activeKeep),
       account: computed(() => AppState.account),
+      vaults: computed(() => AppState.vaults),
 
       async deleteKeep() {
         try {
@@ -100,5 +108,8 @@ export default {
 
 
 <style>
-
+.dropdown-menu {
+  height: 200px;
+  overflow-y: scroll;
+}
 </style>

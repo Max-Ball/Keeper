@@ -9,14 +9,18 @@
       </div>
     </div>
     <h3 class="mt-5">
-      VAULTS:
+      VAULTS <i v-if="profile.id == account.id" class="mdi mdi-plus selectable" data-bs-toggle="modal"
+        data-bs-target="#create-vault-modal"></i>
     </h3>
+    <VaultForm />
     <div v-for="v in vaults" :key="v.id" class="col-md-1">
       <VaultCard :vault="v" />
     </div>
     <h3>
-      KEEPS:
+      KEEPS <i v-if="profile.id == account.id" class="mdi mdi-plus selectable" data-bs-toggle="modal"
+        data-bs-target="#create-keep-modal"></i>
     </h3>
+    <KeepForm />
     <div v-for="k in keeps" :key="k.id" class="col-md-1">
       <KeepCard :keep="k" />
     </div>
@@ -34,6 +38,8 @@ import Pop from '../utils/Pop';
 import { useRoute } from 'vue-router';
 import VaultCard from '../components/VaultCard.vue';
 import KeepCard from '../components/KeepCard.vue';
+import VaultForm from '../components/VaultForm.vue';
+import KeepForm from '../components/KeepForm.vue';
 
 export default {
   setup() {
@@ -73,10 +79,11 @@ export default {
     return {
       profile: computed(() => AppState.activeProfile),
       vaults: computed(() => AppState.vaults),
-      keeps: computed(() => AppState.keeps)
+      keeps: computed(() => AppState.keeps),
+      account: computed(() => AppState.account)
     };
   },
-  components: { VaultCard, KeepCard }
+  components: { VaultCard, KeepCard, VaultForm, KeepForm }
 };
 </script>
 

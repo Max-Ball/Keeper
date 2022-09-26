@@ -16,6 +16,10 @@ namespace Keepers.Services
 
     internal Vault CreateVault(Vault newVault)
     {
+      if (newVault.IsPrivate == null)
+      {
+        newVault.IsPrivate = false;
+      }
       return _vaultsRepo.CreateVault(newVault);
     }
 
@@ -66,10 +70,14 @@ namespace Keepers.Services
       return _vaultsRepo.GetVaultsByAccount(creatorId);
     }
 
-    internal List<Vault> GetVaultsByProfileId(string profileId)
+    internal List<Vault> GetVaultsByProfileId(string profileId, string userId)
     {
       List<Vault> vaults = _vaultsRepo.GetVaultsByProfileId(profileId);
-      vaults = vaults.FindAll(v => v.IsPrivate == false);
+      // NOTE if the line below is commented out postman passes all tests, but then won't show private vaults on front end even it's your own vaults
+      if (profileId != userId)
+      {
+        vaults = vaults.FindAll(v => v.IsPrivate == false);
+      }
       return vaults;
     }
   }

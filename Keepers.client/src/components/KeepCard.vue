@@ -16,6 +16,7 @@
 
 <script>
 import { keepsService } from '../services/KeepsService';
+import { vaultsService } from '../services/VaultsService';
 import { logger } from '../utils/Logger';
 import Pop from '../utils/Pop';
 import KeepModal from './KeepModal.vue';
@@ -26,9 +27,19 @@ export default {
   },
   setup(props) {
     return {
+      async getVaultsByAccount() {
+        try {
+          await vaultsService.getVaultsByAccount()
+        } catch (error) {
+          logger.error('[getting account vaults]')
+          Pop.error(error)
+        }
+      },
+
       async getKeepById() {
         try {
           await keepsService.getKeepById(props.keep.id);
+          this.getVaultsByAccount()
         }
         catch (error) {
           logger.error("[getting one keep]", error);
