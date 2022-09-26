@@ -30,14 +30,27 @@
                   {{keep.description}}
                 </span>
               </div>
-              <div class="row justify-content-center my-2">
-                <div class="col-md-8">
-                  <span class="me-2">
-                    <img class="profile-pic" :src="keep.creator?.picture" alt="profile-pic" height="40">
-                  </span>
-                  <span class="text-center">
-                    {{keep.creator?.name}}
-                  </span>
+              <div class="row my-2">
+                <div class="col-md-5">
+                  <router-link v-if="keep?.creator" :to="{name: 'Profile', params: {profileId: keep.creator.id}}">
+                    <div data-bs-dismiss="modal">
+                      <span class="me-2">
+                        <img class="profile-pic" :src="keep.creator?.picture" alt="profile-pic" height="40" />
+                      </span>
+                      <span class="text-center">
+                        {{keep.creator?.name}}
+                      </span>
+                    </div>
+                  </router-link>
+
+
+                </div>
+                <div class="col-md-6">
+                  <button class="btn btn-outline">Add To Vault</button>
+                </div>
+                <div class="col-md-1">
+                  <i v-if="keep.creatorId == account.id" class="mdi mdi-delete fs-3 selectable" @click="deleteKeep()"
+                    data-bs-dismiss="modal"></i>
                 </div>
               </div>
             </div>
@@ -53,6 +66,9 @@
 <script>
 import { computed } from '@vue/reactivity';
 import { AppState } from '../AppState';
+import { keepsService } from '../services/KeepsService';
+import { logger } from '../utils/Logger';
+import Pop from '../utils/Pop';
 
 
 export default {
@@ -60,7 +76,22 @@ export default {
   setup() {
 
     return {
-      keep: computed(() => AppState.activeKeep)
+      keep: computed(() => AppState.activeKeep),
+      account: computed(() => AppState.account),
+
+      async deleteKeep() {
+        try {
+          const yes = await Pop.confirm("Are you sure you want to delete this keep?")
+          if (!yes) {
+            return
+          }
+          await keepsService.deleteKeep(this.keep.id)
+          Pop.success("This keep has been deleted!")
+        } catch (error) {
+          logger.error('[deleting keep]', error)
+          Pop.error(error)
+        }
+      }
     };
   },
 };
