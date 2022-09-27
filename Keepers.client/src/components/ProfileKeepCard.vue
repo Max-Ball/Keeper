@@ -1,9 +1,9 @@
 <template>
   <div class="rounded elevation-4 selectable my-1 masonry-content" data-bs-toggle="modal" data-bs-target="#keep-modal"
     @click="getKeepById()">
-    <img :src="keep.img" class="img-fluid img-border" alt="keep-image">
+    <img :src="keep.img" class="card-img img-border" alt="keep-image">
     <div class="p-0 d-flex flex-column justify-content-end">
-      <div class="d-flex justify-content-between align-items-center px-2">
+      <div class="d-flex justify-content-between align-items-center px-2 glass">
         <span class="fs-4">{{keep.name}}</span>
       </div>
     </div>

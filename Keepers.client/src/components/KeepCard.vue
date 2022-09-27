@@ -54,7 +54,7 @@ export default {
 
 
 
-<style scoped lang="scss">
+<style lang="scss">
 .img-border {
   border-top-left-radius: 3%;
   border-top-right-radius: 3%;

@@ -23,7 +23,9 @@ class KeepsService {
 
   async addKeepToVault(newKeepToVault) {
     const res = await api.post('api/vaultkeeps', newKeepToVault)
-    AppState.vaults.push(res.data)
+    AppState.vaultKeeps.push(res.data)
+    console.log(res.data);
+    console.log(AppState.vaultKeeps);
   }
 
 }

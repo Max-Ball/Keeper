@@ -1,7 +1,7 @@
 <template>
   <div class="modal fade" id="keep-modal" tabindex="-1" aria-labelledby="keep-modal" aria-hidden="true">
     <div class="modal-dialog modal-xl">
-      <div class="modal-content">
+      <div class="modal-content modal-bg">
         <div class="container-fluid">
           <div class="row">
             <div class="col-md-4 p-1">
@@ -21,8 +21,11 @@
                     <i class="mdi mdi-share-variant"></i>{{keep.shares}}
                   </span>
                 </div>
-                <div class="text-center fs-1 mt-3">
+                <div class="text-center header-color fs-1 mt-3 pb-3">
                   {{keep.name}}
+                </div>
+                <div class="d-flex justify-content-center">
+                  <div class="custom-border"></div>
                 </div>
                 <span class="my-3">
                   {{keep.description}}
@@ -86,6 +89,7 @@ export default {
       keep: computed(() => AppState.activeKeep),
       account: computed(() => AppState.account),
       vaults: computed(() => AppState.vaults),
+      vaultKeep: computed(() => AppState.vaultKeeps),
 
       async deleteKeep() {
         try {
@@ -111,5 +115,20 @@ export default {
 .dropdown-menu {
   height: 200px;
   overflow-y: scroll;
+}
+
+.custom-border {
+  position: relative;
+  height: 10px;
+  border-bottom: 2px solid #22223B;
+  width: 50%;
+}
+
+.modal-bg {
+  background-color: #F2E9E4;
+}
+
+.header-color {
+  color: #22223B;
 }
 </style>

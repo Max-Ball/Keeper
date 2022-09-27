@@ -88,7 +88,7 @@ export default {
 
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .masonry {
   display: grid;
   grid-gap: 10px;
