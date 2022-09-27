@@ -14,6 +14,7 @@ import { keepsService } from '../services/KeepsService'
 import { computed } from '@vue/reactivity';
 import { AppState } from '../AppState';
 import KeepCard from '../components/KeepCard.vue';
+import imagesloaded from 'imagesloaded';
 
 export default {
   setup() {
@@ -47,12 +48,13 @@ export default {
     function waitForImages() {
       let allItems =
         document.getElementsByClassName('masonry-item')
-      // for (let i = 0; i < allItems.length; i++) {
-      //   imagesLoaded(allItems[i], function (instance) {
-      //     let item = instance.elements[0]
-      //     resizeMasonryItem(item)
-      //   })
-      // }
+      for (let i = 0; i < allItems.length; i++) {
+        console.log('getting here?');
+        imagesloaded(allItems[i], function (instance) {
+          let item = instance.elements[0]
+          resizeMasonryItem(item)
+        })
+      }
     }
 
 
@@ -62,9 +64,11 @@ export default {
     })
 
 
+
     async function getAllKeeps() {
       try {
         await keepsService.getAllKeeps();
+        waitForImages()
       }
       catch (error) {
         logger.error("[getting all keeps]", error);
@@ -73,7 +77,6 @@ export default {
     }
     onMounted(() => {
       getAllKeeps();
-      waitForImages()
     });
     return {
       keeps: computed(() => AppState.keeps)
