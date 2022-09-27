@@ -43,7 +43,7 @@
                       </span>
                     </div>
                   </router-link>
-                  <div class="">
+                  <div v-if="!vaultKeeps">
                     <div class="dropdown">
                       <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
@@ -56,7 +56,12 @@
                       </ul>
                     </div>
                   </div>
-                  <div class="">
+                  <div>
+                    <button class="btn btn-warning">
+                      REMOVE FROM VAULT
+                    </button>
+                  </div>
+                  <div>
                     <i v-if="keep.creatorId == account.id" class="mdi mdi-delete fs-3 selectable" @click="deleteKeep()"
                       data-bs-dismiss="modal"></i>
                   </div>
@@ -89,7 +94,7 @@ export default {
       keep: computed(() => AppState.activeKeep),
       account: computed(() => AppState.account),
       vaults: computed(() => AppState.vaults),
-      vaultKeep: computed(() => AppState.vaultKeeps),
+      vaultKeeps: computed(() => AppState.vaultKeeps),
 
       async deleteKeep() {
         try {
