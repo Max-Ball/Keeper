@@ -49,6 +49,9 @@ WHERE k.creatorId = '63237c712d0c7a123937383b';
 -- STUB Vaults!
 DROP TABLE vaults;
 
+TRUNCATE TABLE vaults;
+
+
 CREATE TABLE IF NOT EXISTS vaults(
   id INT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
@@ -89,6 +92,9 @@ WHERE v.creatorId = '63237c712d0c7a123937383b';
 -- STUB Vaultkeeps!
 
 DROP TABLE vaultkeeps;
+
+TRUNCATE TABLE vaultkeeps;
+
 CREATE TABLE IF NOT EXISTS vaultkeeps(
   id INT AUTO_INCREMENT PRIMARY KEY,
   creatorId VARCHAR(255) NOT NULL,

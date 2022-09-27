@@ -18,7 +18,7 @@
                     <i class="mdi mdi-heart selectable"></i>{{keep.kept}}
                   </span>
                   <span class="mx-2">
-                    <i class="mdi mdi-share-variant"></i>{{keep.share}}
+                    <i class="mdi mdi-share-variant"></i>{{keep.shares}}
                   </span>
                 </div>
                 <div class="text-center fs-1 mt-3">
@@ -29,7 +29,7 @@
                 </span>
               </div>
               <div class="row my-2">
-                <div class="col-md-5">
+                <div class="col-md-12 d-flex justify-content-between">
                   <router-link v-if="keep?.creator" :to="{name: 'Profile', params: {profileId: keep.creator.id}}">
                     <div data-bs-dismiss="modal">
                       <span class="me-2">
@@ -40,23 +40,23 @@
                       </span>
                     </div>
                   </router-link>
-                </div>
-                <div class="col-md-6">
-                  <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                      aria-expanded="false">
-                      Add To Vault
-                    </button>
-                    <ul class="dropdown-menu">
-                      <li v-for="v in vaults" :key="v.id">
-                        <VaultList :vault="v" />
-                      </li>
-                    </ul>
+                  <div class="">
+                    <div class="dropdown">
+                      <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Add To Vault
+                      </button>
+                      <ul class="dropdown-menu">
+                        <li v-for="v in vaults" :key="v.id">
+                          <VaultList :vault="v" />
+                        </li>
+                      </ul>
+                    </div>
                   </div>
-                </div>
-                <div class="col-md-1">
-                  <i v-if="keep.creatorId == account.id" class="mdi mdi-delete fs-3 selectable" @click="deleteKeep()"
-                    data-bs-dismiss="modal"></i>
+                  <div class="">
+                    <i v-if="keep.creatorId == account.id" class="mdi mdi-delete fs-3 selectable" @click="deleteKeep()"
+                      data-bs-dismiss="modal"></i>
+                  </div>
                 </div>
               </div>
             </div>
@@ -94,7 +94,7 @@ export default {
             return
           }
           await keepsService.deleteKeep(this.keep.id)
-          Pop.success("This keep has been deleted!")
+          Pop.success(`${AppState.activeKeep.name} has been deleted!`)
         } catch (error) {
           logger.error('[deleting keep]', error)
           Pop.error(error)

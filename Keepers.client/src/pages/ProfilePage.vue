@@ -13,7 +13,7 @@
         data-bs-target="#create-vault-modal"></i>
     </h3>
     <VaultForm />
-    <div v-for="v in vaults" :key="v.id" class="col-md-1">
+    <div v-for="v in vaults" :key="v.id" class="col-md-2">
       <VaultCard :vault="v" />
     </div>
     <h3>
@@ -21,8 +21,8 @@
         data-bs-target="#create-keep-modal"></i>
     </h3>
     <KeepForm />
-    <div v-for="k in keeps" :key="k.id" class="col-md-1">
-      <KeepCard :keep="k" />
+    <div v-for="k in keeps" :key="k.id" class="col-md-2">
+      <ProfileKeepCard :keep="k" />
     </div>
   </div>
 </template>

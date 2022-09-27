@@ -39,11 +39,15 @@ export default {
 
     async function getVault() {
       try {
+        //   if (!AppState.activeVault.isPrivate) {
+        //     logger.log('is this getting here?')
         await vaultsService.getVault(route.params.vaultId)
         getKeepsByVaultId()
+        // }
       } catch (error) {
         logger.error('[getting vault]', error)
-        Pop.error(error)
+        Pop.error("That vault is private")
+        router.push({ name: 'Home' })
       }
     }
 
@@ -73,6 +77,7 @@ export default {
             return
           }
           await vaultsService.deleteVault(route.params.vaultId)
+          Pop.success(`${AppState.activeVault.name} has been deleted`)
           router.push({ name: 'Home' })
         } catch (error) {
           logger.error('[deleting vault]', error)

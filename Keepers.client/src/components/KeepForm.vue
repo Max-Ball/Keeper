@@ -48,6 +48,8 @@ export default {
       async createKeep() {
         try {
           await keepsService.createKeep(editable.value)
+          Pop.success(`${editable.value.name} has been created!`)
+          editable.value = {}
         } catch (error) {
           logger.error('[creating keep]', error)
           Pop.error(error)

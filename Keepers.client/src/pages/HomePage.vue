@@ -19,41 +19,42 @@ export default {
   setup() {
 
     function resizeMasonryItem(item) {
-      console.log(item);
+      // console.log(item);
       let grid = document.getElementsByClassName('masonry')[0]
       let rowGap = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-row-gap'))
       let rowHeight = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-auto-rows'));
-      console.log('rowGap', rowGap);
-      console.log('rowHeight', rowHeight);
+      // console.log('rowGap', rowGap);
+      // console.log('rowHeight', rowHeight);
 
 
 
       let rowSpan = Math.ceil((item.querySelector('.masonry-content').getBoundingClientRect().height + rowGap) / (rowHeight + rowGap))
 
-      console.log('rowSpan', rowSpan);
+      // console.log('rowSpan', rowSpan);
       item.style.gridRowEnd = 'span ' + rowSpan
-      console.log('gridrowend', item.style.gridRowEnd);
+      // console.log('gridrowend', item.style.gridRowEnd);
     }
 
     function resizeAllMasonryItems() {
       let allItems = document.getElementsByClassName('masonry-item')
-      console.log(allItems);
+      // console.log(allItems);
       for (let i = 0; i < allItems.length; i++) {
         resizeMasonryItem(allItems[i])
       }
     }
 
+
     function waitForImages() {
       let allItems =
         document.getElementsByClassName('masonry-item')
-      for (let i = 0; i < allItems.length; i++) {
-        imagesLoaded(allItems[i],
-          function (instance) {
-            let item = instance.elements[0]
-            resizeMasonryItem(item)
-          })
-      }
+      // for (let i = 0; i < allItems.length; i++) {
+      //   imagesLoaded(allItems[i], function (instance) {
+      //     let item = instance.elements[0]
+      //     resizeMasonryItem(item)
+      //   })
+      // }
     }
+
 
     let masonryEvents = ['load', 'resize'];
     masonryEvents.forEach(function (event) {
@@ -92,14 +93,10 @@ export default {
   grid-auto-rows: 0;
 }
 
-.masonry-item {
-  border-radius: 5px;
-}
 
 .masonry-item {
-  background-color: #eee;
   border-radius: 5px;
-  // overflow: hidden;
+  overflow: hidden;
   position: relative;
 }
 
