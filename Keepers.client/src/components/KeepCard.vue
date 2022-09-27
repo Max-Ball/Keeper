@@ -1,10 +1,10 @@
 <template>
-  <div class="card text-light elevation-4 selectable my-1" data-bs-toggle="modal" data-bs-target="#keep-modal"
-    @click="getKeepById()">
-    <img :src="keep.img" class="card-img" alt="keep-image">
-    <div class="card-img-overlay p-0 d-flex flex-column justify-content-end">
+  <div class="rounded text-light elevation-4 selectable my-1 masonry-content" data-bs-toggle="modal"
+    data-bs-target="#keep-modal" @click="getKeepById()">
+    <img :src="keep.img" class="img-fluid rounded" alt="keep-image">
+    <div class="p-0 d-flex flex-column justify-content-end">
       <div class="d-flex justify-content-between align-items-center px-2">
-        <span class="text-shadow card-title fs-4">{{keep.name}}</span>
+        <span class="text-shadow fs-4">{{keep.name}}</span>
         <img class="profile-pic elevation-4" :src="keep.creator.picture" alt="profile-pic" height="30">
       </div>
     </div>
