@@ -15,7 +15,7 @@ class VaultsService {
 
   async createVault(newVault) {
     const res = await api.post('api/vaults', newVault)
-    AppState.vaults.push(res.data)
+    AppState.vaults = AppState.vaults.push(res.data)
   }
 
   async deleteVault(id) {
@@ -25,7 +25,7 @@ class VaultsService {
 
   async getVaultsByAccount() {
     const res = await api.get('account/vaults')
-    AppState.vaults = res.data
+    AppState.accountVaults = res.data
   }
 }
 

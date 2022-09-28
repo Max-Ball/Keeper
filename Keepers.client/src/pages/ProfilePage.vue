@@ -1,12 +1,12 @@
 <template>
-  <div class="row my-3">
-    <div class="col-md-12 d-flex align-items-center">
-      <img class="img-fluid me-3 profile-pic" :src="profile.picture" alt="Profile-pic" :title="profile.name">
-      <div>
-        <div class="fs-1">{{profile.name}}</div>
-        <div class="fs-3">Vaults: {{vaults.length}}</div>
-        <div class="fs-3">Keeps: {{keeps.length}}</div>
-      </div>
+  <div class="row align-items-center my-3">
+    <div class="col-md-1">
+      <img class="img-fluid profile-pic" :src="profile.picture" alt="Profile-pic" :title="profile.name">
+    </div>
+    <div class="col-md-8">
+      <div class="fs-1">{{profile.name}}</div>
+      <div class="fs-3">Vaults: {{vaults.length}}</div>
+      <div class="fs-3">Keeps: {{keeps.length}}</div>
     </div>
     <h3 class="mt-5">
       VAULTS <i v-if="profile.id == account.id" class="mdi mdi-plus selectable" data-bs-toggle="modal"
@@ -18,7 +18,7 @@
         <VaultCard :vault="v" />
       </div>
     </div>
-    <h3>
+    <h3 class="mt-3">
       KEEPS <i v-if="profile.id == account.id" class="mdi mdi-plus selectable" data-bs-toggle="modal"
         data-bs-target="#create-keep-modal" title="Create Keep"></i>
     </h3>
@@ -93,6 +93,7 @@ export default {
     let masonryEvents = ['load', 'resize'];
     masonryEvents.forEach(function (event) {
       window.addEventListener(event, resizeAllMasonryItems)
+      // NOTE I need to add another event to listen for when keeps/vaults are being added
     })
 
 

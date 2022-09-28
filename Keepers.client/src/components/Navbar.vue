@@ -2,8 +2,7 @@
   <nav class="navbar navbar-expand-lg navbar-dark nav-bg px-3">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }" title="Home">
       <div class="d-flex flex-column align-items-center">
-        <img class="me-2" src="..\assets\img\vault-icon.png" alt="Keeper Logo" height="70">
-        <h1><b>Keeper</b></h1>
+        <img src="..\assets\img\vault-icon.png" alt="Keeper Logo" height="70">
       </div>
     </router-link>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"

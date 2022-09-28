@@ -1,5 +1,5 @@
 <template>
-  <div class="modal fade" id="keep-modal" tabindex="-1" aria-labelledby="keep-modal" aria-hidden="true">
+  <div v-if="account.id" class="modal fade" id="keep-modal" tabindex="-1">
     <div class="modal-dialog modal-xl">
       <div class="modal-content modal-bg">
         <div class="container-fluid">
@@ -37,15 +37,15 @@
                       <span class="me-2">
                         <img class="profile-pic" :src="keep.creator?.picture" alt="profile-pic" height="40" />
                       </span>
-                      <span class="text-center">
+                      <span class="text-dark">
                         {{keep.creator?.name}}
                       </span>
                     </div>
                   </router-link>
-                  <div v-if="vaultKeeps.length == 0 || activeVault.creatorId != account.id">
+                  <div v-if="!vaultKeep || activeVault.creatorId != account.id">
                     <div class="dropdown">
                       <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                        aria-expanded="false" title="Add to Vault">
+                        title="Add to Vault">
                         Add To Vault
                       </button>
                       <ul class="dropdown-menu">
@@ -56,7 +56,8 @@
                     </div>
                   </div>
                   <div v-else>
-                    <button class="btn btn-warning" @click="removeKeepFromVault()" title="Remove From Vault">
+                    <button class="btn btn-warning" @click="removeKeepFromVault()" data-bs-dismiss="modal"
+                      title="Remove From Vault">
                       Remove From Vault
                     </button>
                   </div>
@@ -91,7 +92,7 @@ export default {
     return {
       keep: computed(() => AppState.activeKeep),
       account: computed(() => AppState.account),
-      vaults: computed(() => AppState.vaults),
+      vaults: computed(() => AppState.accountVaults),
       vaultKeeps: computed(() => AppState.vaultKeeps),
       activeVault: computed(() => AppState.activeVault),
       vaultKeep: computed(() => AppState.vaultKeeps.find(vk => vk.id == AppState.activeKeep.id)),

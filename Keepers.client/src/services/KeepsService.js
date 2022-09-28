@@ -19,6 +19,7 @@ class KeepsService {
   async createKeep(newKeep) {
     const res = await api.post('/api/keeps', newKeep)
     AppState.keeps.unshift(res.data)
+    AppState.keeps = AppState.keeps
   }
 
   async addKeepToVault(newKeepToVault) {

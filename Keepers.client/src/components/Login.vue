@@ -1,16 +1,15 @@
 <template>
   <span class="navbar-text">
-    <button class="btn selectable text-success lighten-30 text-uppercase my-2 my-lg-0" @click="login"
-      v-if="!user.isAuthenticated" title="login">
+    <button class="btn selectable text-light text-uppercase my-2 my-lg-0" @click="login" v-if="!user.isAuthenticated"
+      title="login">
       Login
     </button>
 
     <div class="dropdown my-2 my-lg-0" v-else>
-      <div class="dropdown-toggle selectable" data-bs-toggle="dropdown" aria-expanded="false" id="authDropdown"
-        title="Login Menu">
+      <div class="dropdown-toggle selectable" data-bs-toggle="dropdown" id="authDropdown" title="Login Menu">
         <div v-if="account.picture || user.picture">
           <img :src="account.picture || user.picture" alt="account photo" height="40" class="rounded" />
-          <span class="mx-3 text-dark fs-6">{{ account.name || user.name }}</span>
+          <span class="mx-3 text-light fs-6">{{ account.name || user.name }}</span>
         </div>
       </div>
       <div class="dropdown-menu p-0 list-group w-100" aria-labelledby="authDropdown" title="Manage Account">
@@ -19,6 +18,13 @@
             Manage Account
           </div>
         </router-link>
+        <div v-if="account.id">
+          <router-link :to="{ name: 'Profile', params:{profileId: account.id} }">
+            <div class="list-group-item list-group-item-action hoverable">
+              Go To Profile
+            </div>
+          </router-link>
+        </div>
         <div class="list-group-item list-group-item-action hoverable text-danger" @click="logout" title="Logout">
           <i class="mdi mdi-logout"></i>
           Logout

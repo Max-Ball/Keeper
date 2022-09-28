@@ -22,7 +22,7 @@ export default {
 
       async addKeepToVault() {
         try {
-          const yes = await Pop.confirm(`Are you sure you want to add ${AppState.activeKeep.name} to ${props.vault.name}?`)
+          const yes = await Pop.confirm(`Are you sure you want to add ${AppState.activeKeep.name} to the ${props.vault.name} vault?`)
           if (!yes) {
             return
           }
