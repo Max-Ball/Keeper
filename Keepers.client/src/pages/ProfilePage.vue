@@ -24,7 +24,7 @@
     </h3>
     <KeepForm />
     <div class="masonry">
-      <div v-for="k in keeps" :key="k.id" class="masonry-item">
+      <div id="keep-change" v-for="k in keeps" :key="k.id" class="masonry-item">
         <ProfileKeepCard :keep="k" />
       </div>
     </div>
@@ -81,7 +81,7 @@ export default {
       let allItems =
         document.getElementsByClassName('masonry-item')
       for (let i = 0; i < allItems.length; i++) {
-        console.log('getting here?');
+        console.log(allItems.length);
         imagesloaded(allItems[i], function (instance) {
           let item = instance.elements[0]
           resizeMasonryItem(item)
@@ -89,12 +89,15 @@ export default {
       }
     }
 
-
+    let keepChange = document.getElementById('keep-change');
     let masonryEvents = ['load', 'resize'];
     masonryEvents.forEach(function (event) {
       window.addEventListener(event, resizeAllMasonryItems)
+
+      // keepChange.addEventListener(event, resizeAllMasonryItems)
       // NOTE I need to add another event to listen for when keeps/vaults are being added
     })
+
 
 
 
@@ -133,6 +136,8 @@ export default {
       getProfile();
     });
     return {
+      // NOTE need to export waitForImages to use on KeepForm
+      // waitForImages,
       profile: computed(() => AppState.activeProfile),
       vaults: computed(() => AppState.vaults),
       keeps: computed(() => AppState.keeps),

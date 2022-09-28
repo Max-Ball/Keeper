@@ -37,6 +37,7 @@ import { ref } from 'vue';
 import { keepsService } from '../services/KeepsService';
 import { logger } from '../utils/Logger';
 import Pop from '../utils/Pop';
+// import ProfilePageVue from '../pages/ProfilePage.vue';
 
 export default {
 
@@ -49,6 +50,8 @@ export default {
         try {
           await keepsService.createKeep(editable.value)
           Pop.success(`${editable.value.name} has been created!`)
+          // NOTE I need to call waitForImages function that is on the ProfilePage
+          // ProfilePageVue.methods.waitForImages();
           editable.value = {}
         } catch (error) {
           logger.error('[creating keep]', error)
