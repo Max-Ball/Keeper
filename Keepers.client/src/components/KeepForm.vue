@@ -18,7 +18,7 @@
               <textarea class="form-control" name="description" cols="30" rows="5"
                 placeholder="Enter a description for your keep..." required v-model="editable.description"></textarea>
               <div class="text-end my-2">
-                <button class="btn btn-primary" data-bs-dismiss="modal">
+                <button class="btn btn-primary" data-bs-dismiss="modal" title="Create Keep">
                   Create Keep
                 </button>
               </div>

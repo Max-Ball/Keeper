@@ -1,5 +1,5 @@
 <template>
-  <a class="dropdown-item selectable" @click="addKeepToVault()">{{vault.name}}</a>
+  <a class="dropdown-item selectable" @click="addKeepToVault()" :title="vault.name">{{vault.name}}</a>
 </template>
 
 

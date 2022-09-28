@@ -1,6 +1,6 @@
 <template>
   <div class="elevation-4 card selectable my-1 masonry-content" data-bs-toggle="modal" data-bs-target="#keep-modal"
-    @click="getKeepById()">
+    @click="getKeepById()" :title="keep.name">
     <img :src="keep.img" class="card-img" alt="keep-image">
     <div class="card-img-overlay p-0 d-flex flex-column justify-content-end">
       <div class="px-2 glass">

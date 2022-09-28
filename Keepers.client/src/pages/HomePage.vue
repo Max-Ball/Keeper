@@ -1,5 +1,5 @@
 <template>
-  <div class="masonry">
+  <div class="masonry hp-margin">
     <div class="masonry-item" v-for="k in keeps" :key="k.id">
       <KeepCard :keep="k" />
     </div>
@@ -69,6 +69,8 @@ export default {
       try {
         await keepsService.getAllKeeps();
         waitForImages()
+        console.log(AppState.vaultKeeps);
+        AppState.vaultKeeps = []
       }
       catch (error) {
         logger.error("[getting all keeps]", error);
@@ -122,5 +124,9 @@ export default {
 .masonry-item:hover:after {
   font-size: 30px;
   background-color: rgba(0, 0, 0, .75);
+}
+
+.hp-margin {
+  margin: 1em 0;
 }
 </style>

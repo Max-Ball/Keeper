@@ -28,6 +28,10 @@ class KeepsService {
     console.log(AppState.vaultKeeps);
   }
 
+  async removeKeepFromVault(id) {
+    await api.delete(`/api/vaultkeeps/${id}`)
+    AppState.vaultKeeps = AppState.vaultKeeps.filter(vk => vk.vaultKeepId != id)
+  }
 }
 
 export const keepsService = new KeepsService()

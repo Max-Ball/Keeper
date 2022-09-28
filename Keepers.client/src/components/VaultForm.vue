@@ -27,7 +27,7 @@
                 </p>
               </div>
               <div class="text-end my-2">
-                <button class="btn btn-primary" data-bs-dismiss="modal">
+                <button class="btn btn-primary" data-bs-dismiss="modal" title="Create Vault">
                   Create Vault
                 </button>
               </div>

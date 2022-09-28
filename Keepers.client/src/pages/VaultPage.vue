@@ -14,7 +14,7 @@
       </div>
     </div>
     <div class="col-md-3 text-end my-3">
-      <button v-if="vault.creator?.id == account.id" class="btn btn-danger" @click="deleteVault()">
+      <button v-if="vault.creator?.id == account.id" class="btn btn-danger" @click="deleteVault()" title="Delete Vault">
         DELETE VAULT
       </button>
     </div>

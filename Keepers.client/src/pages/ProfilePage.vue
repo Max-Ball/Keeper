@@ -1,7 +1,7 @@
 <template>
   <div class="row my-3">
     <div class="col-md-12 d-flex align-items-center">
-      <img class="img-fluid me-3 profile-pic" :src="profile.picture" alt="">
+      <img class="img-fluid me-3 profile-pic" :src="profile.picture" alt="Profile-pic" :title="profile.name">
       <div>
         <div class="fs-1">{{profile.name}}</div>
         <div class="fs-3">Vaults: {{vaults.length}}</div>
@@ -10,7 +10,7 @@
     </div>
     <h3 class="mt-5">
       VAULTS <i v-if="profile.id == account.id" class="mdi mdi-plus selectable" data-bs-toggle="modal"
-        data-bs-target="#create-vault-modal"></i>
+        data-bs-target="#create-vault-modal" title="Create Vault"></i>
     </h3>
     <VaultForm />
     <div class="masonry">
@@ -20,7 +20,7 @@
     </div>
     <h3>
       KEEPS <i v-if="profile.id == account.id" class="mdi mdi-plus selectable" data-bs-toggle="modal"
-        data-bs-target="#create-keep-modal"></i>
+        data-bs-target="#create-keep-modal" title="Create Keep"></i>
     </h3>
     <KeepForm />
     <div class="masonry">
