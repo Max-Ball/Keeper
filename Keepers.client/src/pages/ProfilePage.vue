@@ -34,7 +34,7 @@
 
 
 <script>
-import { computed, onMounted } from 'vue';
+import { computed, onMounted, watchEffect } from 'vue';
 import { AppState } from '../AppState';
 import { profilesService } from '../services/ProfilesService';
 import { logger } from '../utils/Logger';
@@ -46,6 +46,7 @@ import VaultForm from '../components/VaultForm.vue';
 import KeepForm from '../components/KeepForm.vue';
 import imagesloaded from 'imagesloaded';
 import ProfileKeepCard from '../components/ProfileKeepCard.vue';
+import { masonryService } from '../services/MasonryService';
 
 
 export default {
@@ -78,10 +79,10 @@ export default {
 
 
     function waitForImages() {
-      let allItems =
-        document.getElementsByClassName('masonry-item')
+      let allItems = document.getElementsByClassName('masonry-item')
+      console.log(allItems);
+      console.log(allItems.length);
       for (let i = 0; i < allItems.length; i++) {
-        console.log(allItems.length);
         imagesloaded(allItems[i], function (instance) {
           let item = instance.elements[0]
           resizeMasonryItem(item)
@@ -89,13 +90,17 @@ export default {
       }
     }
 
-    let keepChange = document.getElementById('keep-change');
+    let keepChange = document.getElementsByClassName('masonry-item');
+    console.log(keepChange);
     let masonryEvents = ['load', 'resize'];
+    // masonryEvents.forEach(function (event) {
+    //   window.addEventListener(event, resizeAllMasonryItems)
+
+    // })
+
     masonryEvents.forEach(function (event) {
       window.addEventListener(event, resizeAllMasonryItems)
-
-      // keepChange.addEventListener(event, resizeAllMasonryItems)
-      // NOTE I need to add another event to listen for when keeps/vaults are being added
+      document.addEventListener(event, resizeAllMasonryItems)
     })
 
 
@@ -126,6 +131,7 @@ export default {
     async function getProfileKeeps() {
       try {
         await profilesService.getProfileKeeps(route.params.profileId);
+        waitForImages();
       }
       catch (error) {
         logger.error("[getting user keeps]", error);
@@ -136,8 +142,6 @@ export default {
       getProfile();
     });
     return {
-      // NOTE need to export waitForImages to use on KeepForm
-      // waitForImages,
       profile: computed(() => AppState.activeProfile),
       vaults: computed(() => AppState.vaults),
       keeps: computed(() => AppState.keeps),

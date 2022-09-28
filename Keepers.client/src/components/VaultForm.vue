@@ -7,7 +7,7 @@
             <div class="fs-3 my-3">
               Create A Vault
             </div>
-            <form class="form-label" @submit.prevent="createVault()">
+            <form @submit.prevent="createVault()">
               <label for="name">Name:</label>
               <input class="form-control" type="text" name="name" placeholder="Enter the name of your vault..." required
                 v-model="editable.name">
@@ -27,7 +27,7 @@
                 </p>
               </div>
               <div class="text-end my-2">
-                <button class="btn btn-primary" data-bs-dismiss="modal" title="Create Vault">
+                <button class="btn btn-primary" title="Create Vault">
                   Create Vault
                 </button>
               </div>
@@ -43,6 +43,7 @@
 
 <script>
 import { ref } from 'vue';
+import { masonryService } from '../services/MasonryService';
 import { vaultsService } from '../services/VaultsService';
 import { logger } from '../utils/Logger';
 import Pop from '../utils/Pop';
@@ -57,6 +58,7 @@ export default {
         try {
           await vaultsService.createVault(editable.value)
           Pop.success(`Your ${editable.value.name} vault has been created!`)
+          masonryService.waitForImages()
         } catch (error) {
           logger.error('[creating vault]', error)
           Pop.error(error)

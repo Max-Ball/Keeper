@@ -7,7 +7,7 @@
             <div class="fs-3 my-3">
               Create A Keep
             </div>
-            <form class="form-label" @submit.prevent="createKeep()">
+            <form class="form-label form-control" @submit.prevent="createKeep()">
               <label for="name">Name:</label>
               <input class="form-control" type="text" name="name" placeholder="Enter the name of your keep..." required
                 v-model="editable.name">
@@ -18,7 +18,7 @@
               <textarea class="form-control" name="description" cols="30" rows="5"
                 placeholder="Enter a description for your keep..." required v-model="editable.description"></textarea>
               <div class="text-end my-2">
-                <button class="btn btn-primary" data-bs-dismiss="modal" title="Create Keep">
+                <button class="btn btn-primary" title="Create Keep">
                   Create Keep
                 </button>
               </div>
@@ -35,6 +35,7 @@
 <script>
 import { ref } from 'vue';
 import { keepsService } from '../services/KeepsService';
+import { masonryService } from '../services/MasonryService';
 import { logger } from '../utils/Logger';
 import Pop from '../utils/Pop';
 // import ProfilePageVue from '../pages/ProfilePage.vue';
@@ -51,7 +52,7 @@ export default {
           await keepsService.createKeep(editable.value)
           Pop.success(`${editable.value.name} has been created!`)
           // NOTE I need to call waitForImages function that is on the ProfilePage
-          // ProfilePageVue.methods.waitForImages();
+          masonryService.waitForImages()
           editable.value = {}
         } catch (error) {
           logger.error('[creating keep]', error)

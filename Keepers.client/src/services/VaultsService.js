@@ -1,5 +1,6 @@
 import { AppState } from "../AppState";
 import { api } from "./AxiosService";
+import { masonryService } from "./MasonryService"
 
 class VaultsService {
   async getVault(id) {
@@ -16,6 +17,7 @@ class VaultsService {
   async createVault(newVault) {
     const res = await api.post('api/vaults', newVault)
     AppState.vaults.unshift(res.data)
+    // masonryService.waitForImages()
   }
 
   async deleteVault(id) {
