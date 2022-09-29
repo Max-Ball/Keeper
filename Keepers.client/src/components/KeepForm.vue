@@ -10,15 +10,16 @@
             <form class="form-label form-control" @submit.prevent="createKeep()">
               <label for="name">Name:</label>
               <input class="form-control" type="text" name="name" placeholder="Enter the name of your keep..." required
-                v-model="editable.name">
+                v-model="editable.name" title="Enter your name">
               <label for="image" class="mt-3">Image:</label>
               <input class="form-control" type="text" name="image" placeholder="Enter an image for your keep..."
-                required v-model="editable.img">
+                required v-model="editable.img" title="Enter an image">
               <label for="description" class="mt-3">Description:</label>
               <textarea class="form-control" name="description" cols="30" rows="5"
-                placeholder="Enter a description for your keep..." required v-model="editable.description"></textarea>
+                placeholder="Enter a description for your keep..." required v-model="editable.description"
+                title="Enter a description"></textarea>
               <div class="text-end my-2">
-                <button class="btn btn-primary" title="Create Keep">
+                <button class="btn" title="Create Keep">
                   Create Keep
                 </button>
               </div>

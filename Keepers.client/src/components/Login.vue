@@ -8,8 +8,8 @@
     <div class="dropdown my-2 my-lg-0" v-else>
       <div class="dropdown-toggle selectable" data-bs-toggle="dropdown" id="authDropdown" title="Login Menu">
         <div v-if="account.picture || user.picture">
-          <img :src="account.picture || user.picture" alt="account photo" height="40" class="rounded" />
-          <span class="mx-3 text-light fs-6">{{ account.name || user.name }}</span>
+          <img :src="account.picture || user.picture" alt="account photo" height="40" class="profile-pic" />
+          <span class="mx-3 login-text fs-6">{{ account.name || user.name }}</span>
         </div>
       </div>
       <div class="dropdown-menu p-0 list-group w-100" aria-labelledby="authDropdown" title="Manage Account">
@@ -70,5 +70,9 @@ export default {
 
 .hoverable {
   cursor: pointer;
+}
+
+.login-text {
+  color: #22223B;
 }
 </style>

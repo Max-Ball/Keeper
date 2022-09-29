@@ -3,7 +3,7 @@
     <div class="col-md-1">
       <img class="img-fluid profile-pic" :src="profile.picture" alt="Profile-pic" :title="profile.name">
     </div>
-    <div class="col-md-8">
+    <div class="col-md-5">
       <div class="fs-1">{{profile.name}}</div>
       <div class="fs-3">Vaults: {{vaults.length}}</div>
       <div class="fs-3">Keeps: {{keeps.length}}</div>
@@ -30,8 +30,6 @@
     </div>
   </div>
 </template>
-
-
 
 <script>
 import { computed, onMounted, watchEffect } from 'vue';
@@ -188,5 +186,10 @@ export default {
 .masonry-item:hover:after {
   font-size: 30px;
   background-color: rgba(0, 0, 0, .75);
+}
+
+.bg-prof-card {
+  background-color: #22223B;
+  color: #F2E9E4;
 }
 </style>

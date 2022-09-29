@@ -3,7 +3,7 @@
     @click="getKeepById()" :title="keep.name">
     <img :src="keep.img" class="card-img" alt="keep-image">
     <div class="card-img-overlay p-0 d-flex flex-column justify-content-end">
-      <div class="d-flex justify-content-between align-items-center px-2 glass">
+      <div class="d-flex justify-content-between align-items-end p-2 glass">
         <span class="card-title fs-5">{{keep.name}}</span>
         <img class="profile-pic elevation-4" :src="keep.creator?.picture" alt="profile-pic" height="30"
           :title="keep.creator?.name">

@@ -1,4 +1,7 @@
 <template>
+  <div class="d-flex mt-4">
+    <div class="custom-border-home"></div>
+  </div>
   <div class="masonry hp-margin">
     <div class="masonry-item" v-for="k in keeps" :key="k.id">
       <KeepCard :keep="k" />
@@ -128,5 +131,13 @@ export default {
 
 .hp-margin {
   margin: 1em 0;
+}
+
+.custom-border-home {
+  position: relative;
+  margin-bottom: 10px;
+  border-bottom: 3px solid #22223B;
+  border-radius: 5px;
+  width: 100%;
 }
 </style>

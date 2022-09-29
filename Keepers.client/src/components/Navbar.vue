@@ -42,8 +42,10 @@ a:hover {
 }
 
 .nav-bg {
-  background-color: #4A4E69;
+  background: #C9ADA7;
 }
+
+
 
 img {
   filter: contrast(200%);

@@ -10,25 +10,29 @@
             <div class="col-md-8 d-flex flex-column justify-content-between">
               <div class="row align-items-center">
                 <div class="col-md-12 d-flex justify-content-center my-2">
-                  <span class="mx-2 user-select-none" title="Keep Views">
+                  <span class="mx-2 user-select-none fs-3" title="Keep Views">
                     <i class="mdi mdi-eye"></i>{{keep.views}}
                   </span>
-                  <span class="mx-2 user-select-none" title="In vaults">
+                  <span class="mx-2 user-select-none fs-3" title="In vaults">
                     <i class="mdi mdi-heart"></i>{{keep.kept}}
-                  </span>
-                  <span class="mx-2 user-select-none" title="Shared">
-                    <i class="mdi mdi-share-variant"></i>{{keep.shares}}
                   </span>
                 </div>
                 <div class="text-center header-color fs-1 mt-3 pb-3 user-select-none">
                   {{keep.name}}
                 </div>
-                <div class="d-flex justify-content-center">
+                <div class="d-flex justify-content-center mb-4">
                   <div class="custom-border"></div>
                 </div>
-                <span class="my-3">
-                  {{keep.description}}
-                </span>
+                <div class="row justify-content-center">
+                  <div class="col-md-10">
+                    <span class="my-3">
+                      {{keep.description}}
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="d-flex justify-content-center mt-4">
+                <div class="custom-border-btm"></div>
               </div>
               <div class="row my-2">
                 <div class="col-md-12 d-flex justify-content-between">
@@ -44,8 +48,7 @@
                   </router-link>
                   <div v-if="!vaultKeep || activeVault.creatorId != account.id">
                     <div class="dropdown">
-                      <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                        title="Add to Vault">
+                      <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" title="Add to Vault">
                         Add To Vault
                       </button>
                       <ul class="dropdown-menu">
@@ -145,11 +148,23 @@ export default {
   width: 50%;
 }
 
+.custom-border-btm {
+  position: relative;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #22223B;
+  width: 90%;
+}
+
 .modal-bg {
   background-color: #F2E9E4;
 }
 
 .header-color {
   color: #22223B;
+}
+
+.btn {
+  background-color: #22223B;
+  color: #F2E9E4;
 }
 </style>
