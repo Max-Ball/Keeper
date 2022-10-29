@@ -3,10 +3,11 @@
     @click="getKeepById()" :title="keep.name">
     <img :src="keep.img" class="card-img" alt="keep-image">
     <div class="card-img-overlay p-0 d-flex flex-column justify-content-end">
-      <div class="d-flex justify-content-between align-items-end p-2 glass">
-        <span class="card-title fs-5">{{keep.name}}</span>
-        <img class="profile-pic elevation-4" :src="keep.creator?.picture" alt="profile-pic" height="30"
-          :title="keep.creator?.name">
+      <div class="d-flex justify-content-between align-items-end p-2 text-shadow text-light">
+        <span class="card-title fs-5 m-0">{{keep.name}}</span>
+        <img @click.stop="goToProfile()" class="profile-pic elevation-4" :src="keep.creator?.picture" alt="profile-pic"
+          height="30" :title="keep.creator?.name">
+
       </div>
     </div>
   </div>
@@ -16,6 +17,7 @@
 
 
 <script>
+import { useRouter } from 'vue-router';
 import { keepsService } from '../services/KeepsService';
 import { vaultsService } from '../services/VaultsService';
 import { logger } from '../utils/Logger';
@@ -27,7 +29,9 @@ export default {
     keep: { type: Object, required: true }
   },
   setup(props) {
+    const router = useRouter()
     return {
+      router,
       async getVaultsByAccount() {
         try {
           await vaultsService.getVaultsByAccount()
@@ -46,10 +50,15 @@ export default {
           logger.error("[getting one keep]", error);
           Pop.error(error);
         }
+      },
+
+      async goToProfile() {
+        router.push({ name: 'Profile', params: { profileId: props.keep.creator.id } })
+        // Modal.getOrCreateInstance(document.getElementById('keep-modal')).hide()
       }
     };
   },
-  components: { KeepModal }
+  components: { KeepModal },
 };
 </script>
 

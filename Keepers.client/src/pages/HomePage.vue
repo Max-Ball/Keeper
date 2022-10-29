@@ -47,7 +47,6 @@ export default {
       }
     }
 
-
     function waitForImages() {
       let allItems =
         document.getElementsByClassName('masonry-item')
@@ -111,13 +110,11 @@ export default {
 .masonry-item:after {
   font-weight: bold;
   background-color: rgba(0, 0, 0, .5);
-  counter-increment: masonry;
   position: absolute;
   top: 0;
   left: 0;
   height: 100%;
   width: 100%;
-  color: white;
   display: flex;
   justify-content: center;
   align-items: center;

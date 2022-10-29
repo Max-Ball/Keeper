@@ -34,6 +34,7 @@
 
 
 <script>
+import { Modal } from 'bootstrap';
 import { ref } from 'vue';
 import { keepsService } from '../services/KeepsService';
 import { masonryService } from '../services/MasonryService';
@@ -55,6 +56,7 @@ export default {
           // NOTE I need to call waitForImages function that is on the ProfilePage
           masonryService.waitForImages()
           editable.value = {}
+          Modal.getOrCreateInstance(document.getElementById('create-keep-modal')).hide()
         } catch (error) {
           logger.error('[creating keep]', error)
           Pop.error(error)

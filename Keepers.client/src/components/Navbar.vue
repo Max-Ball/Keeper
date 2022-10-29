@@ -42,7 +42,7 @@ a:hover {
 }
 
 .nav-bg {
-  background: #C9ADA7;
+  background-color: #7f7fa5;
 }
 
 

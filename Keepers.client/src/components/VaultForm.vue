@@ -44,6 +44,7 @@
 
 
 <script>
+import { Modal } from 'bootstrap';
 import { ref } from 'vue';
 import { masonryService } from '../services/MasonryService';
 import { vaultsService } from '../services/VaultsService';
@@ -62,6 +63,7 @@ export default {
           Pop.success(`Your ${editable.value.name} vault has been created!`)
           masonryService.waitForImages()
           editable.value = {}
+          Modal.getOrCreateInstance(document.getElementById('create-vault-modal')).hide()
         } catch (error) {
           logger.error('[creating vault]', error)
           Pop.error(error)

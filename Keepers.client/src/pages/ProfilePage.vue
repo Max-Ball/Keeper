@@ -45,6 +45,7 @@ import KeepForm from '../components/KeepForm.vue';
 import imagesloaded from 'imagesloaded';
 import ProfileKeepCard from '../components/ProfileKeepCard.vue';
 import { masonryService } from '../services/MasonryService';
+import { Modal } from 'bootstrap';
 
 
 export default {
@@ -137,6 +138,7 @@ export default {
       }
     }
     onMounted(() => {
+      Modal.getOrCreateInstance(document.getElementById('keep-modal')).hide()
       getProfile();
     });
     return {
